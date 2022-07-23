@@ -20,6 +20,7 @@ namespace MoneyBankers.Pages.Payment
             _context = context;
             _userManager = userManager;
         }
+        //
 
         public IActionResult OnGet()
         {
