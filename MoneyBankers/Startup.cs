@@ -29,7 +29,7 @@ namespace MoneyBankers
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-
+            services.AddDbContext<MoneyBankersContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddDbContext<MoneyBankersContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MoneyBankersContext")));
             services.AddIdentity<ApplicationUser, ApplicationRole>()
