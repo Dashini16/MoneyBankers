@@ -15,10 +15,13 @@
     <a asp-page="Create">Create New</a>
 </p>
 <form>
-    <p>
-        Title: <input type="text" asp-for="SearchString" />
-        <input type="submit" value="Filter" />
-    </p>
+    <div class="form-group">
+        Search by Name: <input asp-for="SearchString" size="60" />
+        <input type="submit" value="Search" asp-page-handler="Test" />
+        <p>
+            <span asp-validation-for="SearchString" class="text-danger"></span>
+        </p>
+    </div>
 </form>
 <table class="table">
     <thead>

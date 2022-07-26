@@ -23,16 +23,19 @@ namespace MoneyBankers.Pages.Payment
         public IList<Models.Payment> Payment { get;set; }
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
-        public async Task OnGetAsync()
+        public string SQLmessage { get; set; }
+        public async Task OnGetAsync(String SearchString)
         {
-            var movies = from m in _context.Payment
-                         select m;
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                movies = movies.Where(s => s.Receiver.Contains(SearchString));
-            }
 
-            Payment= await movies.ToListAsync();
+            SQLmessage = "Select * From Payment Where Sender Like '%" + SearchString + "%'";
+            Payment = await _context.Payment.FromSqlRaw(SQLmessage).ToListAsync();
+            TempData["message"] = "Entered SQL :" + SQLmessage;
+
+
+        }
+        public async Task<IActionResult> OnPostAsync(String SearchString)
+        {
+            return RedirectToPage("./Index");
         }
     }
 }
